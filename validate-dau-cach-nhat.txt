@@ -1,0 +1,13 @@
+$invalidNames = ["円", "ドル", "HKD", "元"];
+        $inputName = $data['name'];
+        $inputName = mb_convert_encoding($inputName, "UTF-8");
+        $inputName = preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $inputName);
+
+        if (in_array($inputName, $invalidNames)) {
+                return [
+                    'code' => ResponseCode::$OTHER_ASSET_INVALID_NAME,
+                    'msg' => trans('error', [], 'ja')[ResponseCode::$OTHER_ASSET_INVALID_NAME]
+                ];
+            } 
+
+Ví dụ :  "name": "　元　",
